@@ -1,5 +1,8 @@
 <?php
 
+// R-CRUD ( Rusher CRUD ) - Fast & Instant CRUD
+// Copyright ©2021 - Afrizal F.A - ICWR-TEAM
+
 class r_crud
 {
 
