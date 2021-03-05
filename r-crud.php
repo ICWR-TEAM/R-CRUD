@@ -24,38 +24,6 @@ class r_crud
 
     }
 
-    public function data_read($connection, $table)
-    {
-
-        $table = mysqli_real_escape_string($connection, $table);
-        $query = "SELECT * FROM $table";
-        $execute = mysqli_query($connection, $query);
-        $data = mysqli_fetch_array($execute);
-        return $data;
-
-    }
-
-    public function data_read_by_id($connection, $table, $id)
-    {
-
-        $id = mysqli_real_escape_string($connection, $id);
-        $table = mysqli_real_escape_string($connection, $table);
-        $query = "SELECT * FROM $table WHERE id='$id'";
-        $execute = mysqli_query($connection, $query);
-        $data = mysqli_fetch_array($execute);
-        return $data;
-
-    }
-
-    public function data_read_by_query($connection, $query)
-    {
-
-        $execute = mysqli_query($connection, $query);
-        $data = mysqli_fetch_array($execute);
-        return $data;
-
-    }
-
     public function data_update($connection, $table, $data, $id)
     {
 
