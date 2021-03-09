@@ -3,6 +3,15 @@ Rusher CRUD ( PHP )
 
 ##
 ### Simple Use
+
+Include this plugins
+
+```php
+include('r-crud.php');
+```
+
+Create variable function
+
 ```php
 $func = New r_crud();
 ```
