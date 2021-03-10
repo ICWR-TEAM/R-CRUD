@@ -47,7 +47,7 @@ class r_crud
     {
 
         $table = mysqli_real_escape_string($connection, $table);
-        $id = $table = mysqli_real_escape_string($connection, $id;
+        $id = mysqli_real_escape_string($connection, $id);
         $query = "SELECT * FROM $table WHERE id='$id'";
         $execute = mysqli_query($connection, $query);
         $data = mysqli_fetch_array($execute);
