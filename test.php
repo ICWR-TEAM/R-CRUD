@@ -8,7 +8,7 @@ $cfg = [
         "hostname" => "localhost",
         "username" => "root",
         "password" => "",
-        "database" => "test"
+        "database" => "r_crud"
     ]
 ];
 
@@ -23,12 +23,12 @@ $data = [
 $id = 1;
 
 echo "\n";
-echo "Insert Status : " . $func->data_create($cfg['db']['connection'], 'tes2', $data);
+echo "Insert Status : " . $func->data_create($cfg['db']['connection'], 'test', $data);
 echo "\n";
 
 echo "\n";
 echo "Read All Status : ";
-print_r($func->data_read_all($cfg['db']['connection'], 'tes2'));
+print_r($func->data_read_all($cfg['db']['connection'], 'test'));
 echo "\n";
 
 $where = [
@@ -40,7 +40,7 @@ $where = [
 
 echo "\n";
 echo "Read By Where : ";
-print_r($func->data_read_where($cfg['db']['connection'], 'tes2', $where));
+print_r($func->data_read_where($cfg['db']['connection'], 'test', $where));
 echo "\n";
 
 $data_change = [
@@ -56,7 +56,7 @@ $where = [
 ];
 
 echo "\n";
-echo "Update Status : " . $func->data_update($cfg['db']['connection'], 'tes2', $data_change, $where);
+echo "Update Status : " . $func->data_update($cfg['db']['connection'], 'test', $data_change, $where);
 echo "\n";
 
 $where = [
@@ -68,7 +68,7 @@ $where = [
 
 echo "\n";
 echo "Read By Where : ";
-print_r($func->data_read_where($cfg['db']['connection'], 'tes2', $where));
+print_r($func->data_read_where($cfg['db']['connection'], 'test', $where));
 echo "\n";
 
 $where = [
@@ -79,6 +79,6 @@ $where = [
 ];
 
 echo "\n";
-echo "Delete Status : " . $func->data_delete($cfg['db']['connection'], 'tes2', $where);
+echo "Delete Status : " . $func->data_delete($cfg['db']['connection'], 'test', $where);
 echo "\n";
 ?>
