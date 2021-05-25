@@ -20,15 +20,19 @@ How to create data
 
 ```php
 $table = 'table';
-$func->$func->data_create($connection, $table, "column1, column2", "'$value1', '$value2'");
+$data = [
+    "a" => 200,
+    "b" => "kontol",
+    "c" => "asw"
+];
+$func->$func->data_create($connection, $table, $data);
 ```
 
 How to read data
 
 ```php
 $table = 'table';
-
-$raw_data = $func->data_read($connection, $table);
+$raw_data = $func->data_read_all($connection, $table);
 
 foreach($raw_data as $id => $data) {
 
@@ -37,12 +41,14 @@ foreach($raw_data as $id => $data) {
 }
 ```
 
-How to read data by id
+How to read data by "WHERE" query
 
 ```php
 $table = 'table';
-$id = 1;
-$data = $func->data_read($connection, $table, $id);
+$where = [
+    "id" => 1
+];
+$data = $func->data_read_where($connection, $table, $where);
 echo $data['column'];
 ```
 
@@ -50,18 +56,22 @@ How to update data
 
 ```php
 $table = 'table';
-$id = 1;
+$where = [
+    "id" => 1
+];
 $data_update = [
   'column1' => $value1,
   'column2' => $value2
 ];
-$func->data_update($connection, $table, $data_update, $id);
+$func->data_update($connection, $table, $data_update, $where);
 ```
 
 How to delete data
 
 ```php
 $table = 'table';
-$id = 1;
-$func->data_delete($connection, $table, $id);
+$where = [
+    "id" => 1
+];
+$func->data_delete($connection, $table, $where);
 ```
