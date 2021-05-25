@@ -6,9 +6,11 @@
 class r_crud
 {
 
-    public function data_create($connection, $table, $index, $value)
+    public function data_create($connection, $table, $data)
     {
 
+        $index = implode(", ", array_map(function ($v, $k) { unset($v); return $k; }, $data, array_keys($data)));
+        $value = implode(", ", array_map(function ($v, $k) { unset($k); return "\"$v\""; }, $data, array_keys($data)));
         $query = "INSERT INTO $table ($index) VALUES ($value)";
         $execute = mysqli_query($connection, $query);
 
@@ -24,7 +26,7 @@ class r_crud
 
     }
 
-    public function data_read($connection, $table)
+    public function data_read_all($connection, $table)
     {
 
         $table = mysqli_real_escape_string($connection, $table);
@@ -33,35 +35,51 @@ class r_crud
         $data = [];
         $no = 1;
 
-        while ($raw_data = mysqli_fetch_array($execute)) {
+        if ($execute) {
 
-            $data[$no++] = $raw_data;
+            while ($raw_data = mysqli_fetch_array($execute)) {
+
+                $data[$no++] = $raw_data;
+    
+            }
+    
+            return $data;
+
+        } else {
+            
+            return false;
 
         }
 
-        return $data;
+    }
+
+    public function data_read_where($connection, $table, $where)
+    {
+
+        if (!empty($where)) {
+
+            $table = mysqli_real_escape_string($connection, $table);
+            $structure_where = implode("AND ", array_map(function ($v, $k) { return "$k = \"$v\""; }, $where, array_keys($where)));
+            $query = "SELECT * FROM $table WHERE $structure_where";
+            $execute = mysqli_query($connection, $query);
+            $data = mysqli_fetch_array($execute);
+            return $data;
+
+        } else {
+
+            return false;
+
+        }
 
     }
 
-    public function data_read_by_id($connection, $table, $id)
+    public function data_update($connection, $table, $data, $where)
     {
 
         $table = mysqli_real_escape_string($connection, $table);
-        $id = mysqli_real_escape_string($connection, $id);
-        $query = "SELECT * FROM $table WHERE id='$id'";
-        $execute = mysqli_query($connection, $query);
-        $data = mysqli_fetch_array($execute);
-        return $data;
-
-    }
-
-    public function data_update($connection, $table, $data, $id)
-    {
-
-        $id = mysqli_real_escape_string($connection, $id);
-        $table = mysqli_real_escape_string($connection, $table);
-        $struct_data = implode(', ', array_map(function ($v, $k) { return sprintf("%s=\"%s\"", $k, $v); }, $data, array_keys($data)));
-        $query = "UPDATE $table SET $struct_data WHERE id='$id'";
+        $struct_data = implode(", ", array_map(function ($v, $k) { return "$k = \"$v\""; }, $data, array_keys($data)));
+        $structure_where = implode("AND ", array_map(function ($v, $k) { return "$k = \"$v\""; }, $where, array_keys($where)));
+        $query = "UPDATE $table SET $struct_data WHERE $structure_where";
         $execute = mysqli_query($connection, $query);
 
         if ($execute) {
@@ -76,11 +94,12 @@ class r_crud
 
     }
 
-    public function data_delete($connection, $table, $id)
+    public function data_delete($connection, $table, $where)
     {
 
-        $id = mysqli_real_escape_string($connection, $id);
-        $query = "DELETE FROM $table WHERE id='$id'";
+        $table = mysqli_real_escape_string($connection, $table);
+        $structure_where = implode("AND ", array_map(function ($v, $k) { return "$k = \"$v\""; }, $where, array_keys($where)));
+        $query = "DELETE FROM $table WHERE $structure_where";
         $execute = mysqli_query($connection, $query);
 
         if ($execute) {
