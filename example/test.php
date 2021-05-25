@@ -14,6 +14,8 @@ $cfg = [
 
 $cfg['db']['connection'] = mysqli_connect($cfg['db']['hostname'], $cfg['db']['username'], $cfg['db']['password'], $cfg['db']['database']);
 
+$table = "test";
+
 $data = [
     "a" => 123,
     "b" => "abc",
@@ -23,12 +25,12 @@ $data = [
 $id = 1;
 
 echo "\n";
-echo "Insert Status : " . $func->data_create($cfg['db']['connection'], 'test', $data);
+echo "Insert Status : " . $func->data_create($cfg['db']['connection'], $table, $data);
 echo "\n";
 
 echo "\n";
 echo "Read All Status : ";
-print_r($func->data_read_all($cfg['db']['connection'], 'test'));
+print_r($func->data_read_all($cfg['db']['connection'], $table));
 echo "\n";
 
 $where = [
@@ -40,7 +42,7 @@ $where = [
 
 echo "\n";
 echo "Read By Where : ";
-print_r($func->data_read_where($cfg['db']['connection'], 'test', $where));
+print_r($func->data_read_where($cfg['db']['connection'], $table, $where));
 echo "\n";
 
 $data_change = [
@@ -56,7 +58,7 @@ $where = [
 ];
 
 echo "\n";
-echo "Update Status : " . $func->data_update($cfg['db']['connection'], 'test', $data_change, $where);
+echo "Update Status : " . $func->data_update($cfg['db']['connection'], $table, $data_change, $where);
 echo "\n";
 
 $where = [
@@ -68,7 +70,7 @@ $where = [
 
 echo "\n";
 echo "Read By Where : ";
-print_r($func->data_read_where($cfg['db']['connection'], 'test', $where));
+print_r($func->data_read_where($cfg['db']['connection'], $table, $where));
 echo "\n";
 
 $where = [
@@ -79,6 +81,6 @@ $where = [
 ];
 
 echo "\n";
-echo "Delete Status : " . $func->data_delete($cfg['db']['connection'], 'test', $where);
+echo "Delete Status : " . $func->data_delete($cfg['db']['connection'], $table, $where);
 echo "\n";
 ?>
