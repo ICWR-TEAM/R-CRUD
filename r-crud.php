@@ -62,8 +62,17 @@ class r_crud
             $structure_where = implode("AND ", array_map(function ($v, $k) { return "$k = \"$v\""; }, $where, array_keys($where)));
             $query = "SELECT * FROM $table WHERE $structure_where";
             $execute = mysqli_query($connection, $query);
-            $data = mysqli_fetch_array($execute);
-            return $data;
+
+            if ($execute) {
+
+                $data = mysqli_fetch_array($execute);
+                return $data;
+
+            } else {
+
+                return false;
+
+            }
 
         } else {
 
