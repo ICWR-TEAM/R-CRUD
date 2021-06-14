@@ -9,6 +9,7 @@ class r_crud
     public function data_create($connection, $table, $data)
     {
 
+        $table = mysqli_real_escape_string($connection, $table);
         $index = implode(", ", array_map(function ($v, $k) { unset($v); return $k; }, $data, array_keys($data)));
         $value = implode(", ", array_map(function ($v, $k) { unset($k); return "\"$v\""; }, $data, array_keys($data)));
         $query = "INSERT INTO $table ($index) VALUES ($value)";
