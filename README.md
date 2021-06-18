@@ -25,7 +25,7 @@ $data = [
     "column2" => $value2,
     "column3" => $value3
 ];
-$func->$func->data_create($connection, $table, $data);
+$func->data_create($connection, $table, $data);
 ```
 
 How to read data
