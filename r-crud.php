@@ -77,7 +77,7 @@ class r_crud
 
         } else {
 
-            return true;
+            return false;
 
         }
 
