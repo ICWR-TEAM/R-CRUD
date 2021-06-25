@@ -68,7 +68,7 @@ class r_crud
 
                 $data = mysqli_fetch_array($execute);
                 
-                if ($data > 0) {
+                if (mysqli_num_rows($data) > 0) {
                  
                     return $data;
                     
