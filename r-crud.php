@@ -64,22 +64,14 @@ class r_crud
             $query = "SELECT * FROM $table WHERE $structure_where";
             $execute = mysqli_query($connection, $query);
 
-            if ($execute) {
-                
-                if (mysqli_num_rows($execute) > 0) {
+            if (mysqli_num_rows($execute) > 0) {
 
-                    $data = mysqli_fetch_array($execute);
-                    return $data;
+                $data = mysqli_fetch_array($execute);
+                return $data;
                     
-                } else {
-                    
-                    return true;
-
-                }
-
             } else {
-
-                return false;
+                
+                return true;
 
             }
 
