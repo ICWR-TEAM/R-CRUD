@@ -13,7 +13,7 @@ include('r-crud.php');
 Create variable function
 
 ```php
-$func = New r_crud();
+$func = New r_crud($connection);
 ```
 
 How to create data
@@ -25,14 +25,14 @@ $data = [
     "column2" => $value2,
     "column3" => $value3
 ];
-$func->data_create($connection, $table, $data);
+$func->data_create($table, $data);
 ```
 
 How to read data
 
 ```php
 $table = 'table';
-$raw_data = $func->data_read_all($connection, $table);
+$raw_data = $func->data_read_all($table);
 
 foreach($raw_data as $id => $data) {
 
@@ -48,7 +48,7 @@ $table = 'table';
 $where = [
     "id" => 1
 ];
-$data = $func->data_read_where($connection, $table, $where);
+$data = $func->data_read_where($table, $where);
 echo $data['column'];
 ```
 
@@ -63,7 +63,7 @@ $data_update = [
   'column1' => $value1,
   'column2' => $value2
 ];
-$func->data_update($connection, $table, $data_update, $where);
+$func->data_update($table, $data_update, $where);
 ```
 
 How to delete data
@@ -73,5 +73,5 @@ $table = 'table';
 $where = [
     "id" => 1
 ];
-$func->data_delete($connection, $table, $where);
+$func->data_delete($table, $where);
 ```
