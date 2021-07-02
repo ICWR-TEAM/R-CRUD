@@ -1,18 +1,18 @@
 <?php
 
-include('r-crud.php');
-$func = New r_crud();
-
 $cfg = [
     "db" => [
         "hostname" => "localhost",
         "username" => "root",
         "password" => "",
-        "database" => "r_crud"
+        "database" => "test"
     ]
 ];
 
 $cfg['db']['connection'] = mysqli_connect($cfg['db']['hostname'], $cfg['db']['username'], $cfg['db']['password'], $cfg['db']['database']);
+
+include('r-crud.php');
+$func = New r_crud($cfg['db']['connection']);
 
 $table = "test";
 
@@ -25,12 +25,12 @@ $data = [
 $id = 1;
 
 echo "\n";
-echo "Insert Status : " . $func->data_create($cfg['db']['connection'], $table, $data);
+echo "Insert Status : " . $func->data_create($table, $data);
 echo "\n";
 
 echo "\n";
 echo "Read All Status : ";
-print_r($func->data_read_all($cfg['db']['connection'], $table));
+print_r($func->data_read_all($table));
 echo "\n";
 
 $where = [
@@ -42,7 +42,7 @@ $where = [
 
 echo "\n";
 echo "Read By Where : ";
-print_r($func->data_read_where($cfg['db']['connection'], $table, $where));
+print_r($func->data_read_where($table, $where));
 echo "\n";
 
 $data_change = [
@@ -58,7 +58,7 @@ $where = [
 ];
 
 echo "\n";
-echo "Update Status : " . $func->data_update($cfg['db']['connection'], $table, $data_change, $where);
+echo "Update Status : " . $func->data_update($table, $data_change, $where);
 echo "\n";
 
 $where = [
@@ -70,7 +70,7 @@ $where = [
 
 echo "\n";
 echo "Read By Where : ";
-print_r($func->data_read_where($cfg['db']['connection'], $table, $where));
+print_r($func->data_read_where($table, $where));
 echo "\n";
 
 $where = [
@@ -81,6 +81,6 @@ $where = [
 ];
 
 echo "\n";
-echo "Delete Status : " . $func->data_delete($cfg['db']['connection'], $table, $where);
+echo "Delete Status : " . $func->data_delete($table, $where);
 echo "\n";
 ?>
