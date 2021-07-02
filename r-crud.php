@@ -8,7 +8,7 @@ class r_crud
 
     public $connection;
 
-    function __construct($connection)
+    public function __construct($connection)
     {
         
         $this->connection = $connection;
