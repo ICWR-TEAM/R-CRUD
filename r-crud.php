@@ -140,5 +140,49 @@ class r_crud
         }
 
     }
+    
+    public function num_rows($table, $where)
+    {
+
+        if (!empty($where)) {
+
+            $table = mysqli_real_escape_string($this->connection, $table);
+            $structure_where = implode("AND ", array_map(function ($v, $k) { return "$k = \"$v\""; }, $where, array_keys($where)));
+            $query = "SELECT * FROM $table WHERE BINARY $structure_where";
+            $execute = mysqli_query($this->connection, $query);
+
+            if ($execute) {
+
+                if (mysqli_num_rows($execute) > 0) {
+
+                    $data = mysqli_num_rows($execute);
+                    return $data;
+
+                } else {
+
+                    return true;
+
+                }
+
+            } else {
+
+                return false;
+
+            }
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+
+    public function real_escape($param)
+    {
+        return mysqli_real_escape_string($this->connection,$param);
+    }
+
 
 }
